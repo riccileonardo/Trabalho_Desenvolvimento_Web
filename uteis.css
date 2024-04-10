@@ -1,0 +1,24 @@
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.mg-left-20px{
+    margin-left: 20px;
+}
+.mg-left-60px{
+    margin-left: 60px;
+}
+.mg-top-40px{
+    margin-top: 40px;
+}
+.mg-right-40px{
+    margin-right: 80px;
+}
+.bg-cinza{
+    background-color: #ebebeb;
+}
