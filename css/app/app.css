@@ -1,0 +1,16 @@
+.password-manager-container {
+    max-width: 1200px;
+    margin: auto;
+}
+.password-manager-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+.password-item {
+    cursor: pointer;
+    transition: background-color .3s;
+}
+.password-item:hover {
+    background-color: #f8f9fa;
+}
