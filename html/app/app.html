@@ -20,6 +20,7 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../../css/app/app.css">
+    <script src="../../js/App/Settings.js" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-cinza">
@@ -67,9 +68,17 @@
                             <a href="/senhas/{{ senhas[0] }}/editar" class="btn btn-sm btn-outline-dark" id="editar">
                                 <ion-icon name="create-outline"></ion-icon>
                             </a>
-                            <a href="/senhas/{{ senhas[0] }}/visualizar" class="btn btn-sm btn-outline-primary" id="visualzar">
-                                <ion-icon name="eye"></ion-icon>
-                            </a>
+                            <button id="open-modal" class="btn btn-sm btn-outline-primary"><ion-icon name="eye"></ion-icon></button>
+                        <div id="fade" class="hide"></div>
+                        <div id="modal" class="hide">
+                        <div class="modal-header">
+                            <h2>Este é o Modal</h2>
+                            <button id="close-modal">Fechar</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>teste</p>
+                        </div>
+                        </div>
                             <form method="POST" action="/senhas/{{ senhas[0] }}/delete" style="display:inline;">
                               <button type="submit" class="btn btn-sm btn-outline-danger" id="excluir" onclick="return confirm('Deseja realmente excluir este veículo?')">
                                 <ion-icon name="trash-outline"></ion-icon>
