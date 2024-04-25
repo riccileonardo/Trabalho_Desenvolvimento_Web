@@ -16,9 +16,21 @@
 .mg-top-40px{
     margin-top: 40px;
 }
+.mg-top-50px{
+    margin-top: 50px;
+}
+.mg-top-100px{
+    margin-top: 100px;
+}
+.align-center{
+    margin-top: 50px;
+}
 .mg-right-40px{
     margin-right: 80px;
 }
 .bg-cinza{
     background-color: #ebebeb;
+}
+.align-center{
+    text-align: center;
 }
