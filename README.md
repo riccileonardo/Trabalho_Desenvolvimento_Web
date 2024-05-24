@@ -3,12 +3,12 @@
 ## Descrição
 
 - Este projeto é uma aplicação Node.js utilizando Express, gerenciamento de sessões e banco de dados MySQL para criar e guardar suas senhas em segurança.
----
+
 ### Pré-requisitos
 
 - Node.js instalado (versão 14.x ou superior)
 - MySQL instalado e rodando
----
+
 ## Instalação
 
 - Siga os passos abaixo para configurar e executar o projeto em sua máquina local:
@@ -17,7 +17,7 @@
 git clone https://github.com/riccileonardo/Trabalho_Desenvolvimento_Web.git
 cd projeto
 ```
----
+
 ## 2. Instale as dependências:
 ```sh
 npm install sendgrid/mail
@@ -29,7 +29,7 @@ npm install google-auth-library
 npm install nodemailer
 npm install mysql
 ```
----
+
 ## 3. Configuração do banco de dados:
 
 - Este projeto utiliza um banco de dados chamado `chavemestra` com três tabelas principais: `usuarios`, `senhas` e `google_users`.
@@ -48,7 +48,7 @@ const conexao = mysql.createConnection({
     database: 'chavemestra'
 });
 ```
----
+
 ## Rodando o Sistema:
 Existem duas maneiras de iniciar o sistema: modo de produção e modo de desenvolvimento.
 
@@ -61,13 +61,13 @@ o servidor sempre que houver alterações no código.
 
 O servidor estará acessível em http://localhost:9000 por padrão depois de iniciado.
 
----
+
 ## Dependências do front-end
 A API utiliza as seguintes dependências:
 
 - **Bootstrap**: Framework CSS para estilização.
 - **jQuery**: Biblioteca JavaScript para manipulação de eventos e requisições AJAX.
----
+
 ## Autores
 Esta API foi desenvolvida pelo grupo de modo geral.
 
