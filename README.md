@@ -38,7 +38,7 @@ npm install mysql
 - A tabela `senhas` armazena senhas de usuários para diferentes recursos.
 - A tabela `usuarios` armazena informações básicas de usuários, incluindo senhas criptografadas que se cadastraram através do sistema.
 
-- Para configuração do banco de dados, execute o script do arquivo [scriptdb.sql]() em seu MySQL Workbench, Logo após a criação do banco em sua máquina local, configure o arquivo [conexao.js](db/conexao.js) com os parâmetros necessários.
+- Para configuração do banco de dados, execute o script do arquivo [scriptdb.sql](scriptdb.sql) em seu MySQL Workbench, Logo após a criação do banco em sua máquina local, configure o arquivo [conexao.js](db/conexao.js) com os parâmetros necessários.
 
 ```javascript
 const conexao = mysql.createConnection({
