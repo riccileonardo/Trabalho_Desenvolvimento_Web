@@ -70,8 +70,8 @@ A API utiliza as seguintes dependências:
 
 ## Imagens de Demonstração de telas do sistema
 <p float="left">
-    <img src="static/img/telas/home.png" width="370" />
-    <img src="static/img/telas/login.png" width="370" />
+    <img src="static/img/telas/home.png" width="385" />
+    <img src="static/img/telas/login.png" width="385" />
     <img src="static/img/telas/recover.png" width="500" />
     <img src="static/img/telas/cadastro.png" width="500" />
     <img src="static/img/telas/app.png" width="500" />
