@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Senhas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS  -->
+    <link rel="stylesheet" href="../../css/app/app.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <!-- Modal Edicao de senha -->
+    <div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar Campos</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicao">
+                        <div class="mb-3">
+                            <label for="recursoEdicao" class="form-label">Recurso</label>
+                            <input type="text" class="form-control" id="recursoEdicao" name="recurso" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="usuarioEdicao" class="form-label">Usuário</label>
+                            <input type="text" class="form-control" id="usuarioEdicao" name="usuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="senhaEdicao" class="form-label">Senha</label>
+                            <input type="text" class="form-control" id="senhaEdicao" name="senha">
+                        </div>
+                        <div class="mb-3">
+                            <label for="linkEdicao" class="form-label">Link</label>
+                            <input type="url" class="form-control" id="linkEdicao" name="link" required>
+                        </div>
+                        <input type="hidden" id="idEdicao" name="id">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Adicionar Nova senha -->
+    <div class="modal fade" id="modalAdicionarNovo" tabindex="-1" aria-labelledby="modalAdicionarNovoLabel"aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdicionarNovoLabel">Cadastar nova senha</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="formAdicionarNovo" onsubmit="salvarSenha(event)">
+                        <div class="mb-3">
+                            <label for="recurso" class="form-label">Recurso</label>
+                            <input type="text" class="form-control" id="recurso" name="recurso" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="usuario" class="form-label">Usuário</label>
+                            <input type="text" class="form-control" id="usuario" name="usuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="text" class="form-control" id="senha" name="senha" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="link" class="form-label">Link</label>
+                            <input type="url" class="form-control" id="link" name="link" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Confirmação de Senha Salva -->
+    <div class="modal fade" id="modalConfirmacaoSenhaSalva" tabindex="-1" aria-labelledby="modalConfirmacaoSenhaSalvaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmacaoSenhaSalvaLabel">Senha Salva</h5>
+                </div>
+                <div class="modal-body">
+                    Sua senha foi salva com sucesso.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="redirecionarParaDado()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Confirmação de Deleção -->
+    <div class="modal fade" id="modalConfirmacaoDelecao" tabindex="-1" aria-labelledby="modalConfirmacaoDelecaoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmacaoDelecaoLabel">Confirmar</h5>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja deletar esta senha?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarDelecao">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal com mensagem de senha deletada -->
+    <div class="modal fade" id="modalSenhaDeletada" tabindex="-1" aria-labelledby="modalSenhaDeletadaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSenhaDeletadaLabel">Senha Deletada</h5>
+                </div>
+                <div class="modal-body
+                ">
+                    Sua senha foi deletada com sucesso.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="redirecionarParaDado()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal com mensagem de senha editada -->
+    <div class="modal fade" id="modalSenhaEditada" tabindex="-1" aria-labelledby="modalSenhaEditadaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSenhaEditadaLabel">Senha Editada</h5>
+                </div>
+                <div class="modal-body
+                ">
+                    Sua senha foi editada com sucesso.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="redirecionarParaDado()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid password-manager-header">
+        <div class="password-manager-container">
+            <h1 class="text-center">Gerenciador de Senhas</h1>
+        </div>
+    </div>
+    
+    <div class="container my-4">
+        <div class="password-manager-container">
+            <div class="d-flex justify-content-end mb-2">
+                <button id="btnAdicionarNovasenha" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Adicionar Novo</button>
+            </div>
+            
+            <div class="table-responsive">
+                <table id="tabela-senhas" class="table">
+                    <thead>
+                        <tr>
+                            <th>Recurso</th>
+                            <th>Usuário</th>
+                            <th>Senha</th>
+                            <th>URL</th>
+                            <th>Modificado</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-senhas-body"></tbody>
+                </table>
+            </div>
+            <!-- botão de sair -->
+            <div class="d-flex justify-content-end m-2">
+                <button id="btnSair" class="btn btn-primary"><i class="bi bi-door-open"></i> Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Carregar os dados das senhas ao carregar a página
+            carregarDadosSenhas();
+
+            // Evento para abrir o modal de adicionar novo ao clicar no botão de adicionar novo
+            const btnAdicionarNovo = document.getElementById("btnAdicionarNovasenha");
+            const modalAdicionarNovo = new bootstrap.Modal(document.getElementById('modalAdicionarNovo'));
+            btnAdicionarNovo.addEventListener("click", () => {
+                modalAdicionarNovo.show();
+            });
+
+        });
+
+        function salvarSenha(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const form = document.getElementById('formAdicionarNovo');
+            const formData = new FormData(form);
+
+            // Convertendo FormData para JSON
+            const jsonData = {};
+            for (const [key, value] of formData.entries()) {
+                jsonData[key] = value;
+            }
+
+            fetch('/api/senhas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Exibir o modal de confirmação
+                        const modalConfirmacao = new bootstrap.Modal(document.getElementById('modalConfirmacaoSenhaSalva'));
+                        modalConfirmacao.show();
+                        // Limpar campos do formulário após adicionar a senha
+                        form.reset();
+                        // Fechar o modal após adicionar a senha
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('modalAdicionarNovo'));
+                        modal.hide();
+                    } else {
+                        alert('Erro ao adicionar senha. Por favor, tente novamente.');
+                        console.error('Erro ao salvar senha:', response);
+                    }
+                })
+                .catch(error => console.error('Erro ao salvar senha:', error));
+        }
+
+        function carregarDadosSenhas() {
+            fetch("/get-senhas-data")
+                .then((response) => response.json())
+                .then((data) => {
+                    if (Array.isArray(data.results) && data.results.length > 0) {
+                        atualizarTabelaSenhas(data.results);
+                        console.log("Os dados foram recebidos com sucesso.");
+                    } else {
+                        console.log("Nenhuma senha encontrada.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erro ao buscar os dados:", error);
+                });
+        }
+
+        function atualizarTabelaSenhas(senhas) {
+            const tabelaSenhasBody = document.querySelector("#tabela-senhas-body");
+            tabelaSenhasBody.innerHTML = "";
+
+            senhas.forEach((senha) => {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${senha.recurso}</td>
+                    <td>${senha.usuario}</td>
+                    <td><input type="password" value="${senha.senha}" readonly data-id="${senha.id}"></td>
+                    <td><a href="${senha.link}" target="_blank">${senha.link}</a></td>
+                    <td>${new Date(senha.modificado).toLocaleString()}</td>
+                    <td>
+                        <button class="btn btn-danger btn-deletar" data-id="${senha.id}"><i class="bi bi-trash3-fill" style="cursor: pointer;"></i></button>
+                        <button class="btn btn-warning btn-editar" data-id="${senha.id}"><i class="bi bi-pen-fill" style="cursor: pointer;"></i></button>
+                        <button class="btn btn-primary btn-exibir-esconder" data-id="${senha.id}"><i class="bi bi-eye-fill" style="cursor: pointer;"></i></button>
+                    </td>
+                `;
+                tabelaSenhasBody.appendChild(newRow);
+            });
+
+            document.querySelectorAll('.btn-editar').forEach(button => {
+                button.addEventListener('click', () => {
+                    const senhaId = button.getAttribute('data-id');
+                    editarSenha(senhaId);
+                });
+            });
+
+            document.querySelectorAll('.btn-exibir-esconder').forEach(button => {
+                button.addEventListener('click', () => {
+                    const senhaId = button.getAttribute('data-id');
+                    exibirEsconderSenha(senhaId);
+                });
+            });
+
+            document.querySelectorAll('.btn-deletar').forEach(button => {
+                button.addEventListener('click', () => {
+                    const senhaId = button.getAttribute('data-id');
+                    deletarSenha(senhaId);
+                });
+            });
+        }
+
+        function exibirEsconderSenha(senhaId) {
+            const senhaInput = document.querySelector(`input[data-id="${senhaId}"]`);
+            if (senhaInput) {
+                const senhaType = senhaInput.type;
+                const btnExibirEsconder = document.querySelector(`.btn-exibir-esconder[data-id="${senhaId}"] i`);
+
+                if (senhaType === 'password') {
+                    senhaInput.type = 'text';
+                    btnExibirEsconder.className = 'bi bi-eye-slash-fill';
+                    btnExibirEsconder.title = 'Esconder Senha';
+                } else {
+                    senhaInput.type = 'password';
+                    btnExibirEsconder.className = 'bi bi-eye-fill';
+                    btnExibirEsconder.title = 'Exibir Senha';
+                }
+            } else {
+                console.log(`Elemento input[data-id="${senhaId}"] não encontrado.`);
+            }
+        }
+
+        function editarSenha(senhaId) {
+            fetch(`/api/senhas/${senhaId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        console.error("Erro ao buscar dados da senha:", data.error);
+                    } else {
+                        preencherFormularioEdicao(data.senha);
+                        const modalEdicao = new bootstrap.Modal(document.getElementById('modalEdicao'));
+                        modalEdicao.show();
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erro ao buscar dados da senha:", error);
+                });
+
+            const formEdicao = document.getElementById("formEdicao");
+            formEdicao.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const jsonData = Object.fromEntries(formData.entries());
+
+                fetch(`/api/senhas/${senhaId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const modalSenhaEditada = new bootstrap.Modal(document.getElementById('modalSenhaEditada'));
+                            modalSenhaEditada.show();
+                            const modalEdicao = bootstrap.Modal.getInstance(document.getElementById('modalEdicao'));
+                            modalEdicao.hide();
+                        } else {
+                            console.error("Erro ao atualizar dados:", data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Erro ao atualizar dados:", error);
+                    });
+            }, { once: true }); // Adiciona o evento apenas uma vez
+        }
+
+        function preencherFormularioEdicao(senha) {
+            document.getElementById("recursoEdicao").value = senha.recurso;
+            document.getElementById("usuarioEdicao").value = senha.usuario;
+            document.getElementById("senhaEdicao").value = senha.senha;
+            document.getElementById("linkEdicao").value = senha.link;
+            document.getElementById("idEdicao").value = senha.id;
+        }
+
+        function redirecionarParaDado() {
+            window.location.href = '/dado'; // Redireciona para a rota /dado para atualizar a página
+        }
+
+        function deletarSenha(senhaId) {
+            const modalConfirmacaoDelecao = new bootstrap.Modal(document.getElementById('modalConfirmacaoDelecao'));
+            modalConfirmacaoDelecao.show();
+
+            const btnConfirmarDelecao = document.getElementById('btnConfirmarDelecao');
+            btnConfirmarDelecao.addEventListener('click', () => {
+                fetch(`/api/senhas/${senhaId}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const modalSenhaDeletada = new bootstrap.Modal(document.getElementById('modalSenhaDeletada'));
+                            modalSenhaDeletada.show();
+                            modalConfirmacaoDelecao.hide();
+                        } else {
+                            console.error("Erro ao deletar senha:", data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Erro ao deletar senha:", error);
+                    });
+            });
+        }
+
+        // Adicionando um evento de clique ao botão de sair
+        document.getElementById('btnSair').addEventListener('click', function() {
+            // Fazer uma requisição para a rota de logout (/logout)
+            fetch('/logout')
+            .then(response => {
+                if (response.redirected) {
+                // Redirecionar para a página inicial após o logout
+                window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao fazer logout:', error);
+                // Em caso de erro, você pode exibir uma mensagem ao usuário
+                alert('Erro ao fazer logout, tente novamente.');
+            });
+        });
+    </script>
+</body>
+
+</html>

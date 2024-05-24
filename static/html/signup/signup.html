@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/signup/signup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>login</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Cadastro</h3>
+                    </div>
+                    <div class="card-body">
+                      <form action="/cadastrar" method="POST" class="signup-form" id="signupForm">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+                            <input type="submit" value="Cadastrar" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de confirmação -->
+<div class="modal fade" id="confirmacaoModal" tabindex="-1" aria-labelledby="confirmacaoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="confirmacaoModalLabel">Cadastro Confirmado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              Seu cadastro foi realizado com sucesso!
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="redirectToLogin()">OK</button>
+          </div>
+      </div>
+  </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+
+    <script>
+     // Função para redirecionar para a rota de login
+function redirectToLogin() {
+    window.location.href = '/Login'; // Altere para a rota correta se necessário
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('signupForm');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita o envio padrão do formulário
+
+        const nome = form.querySelector('#nome').value;
+        const email = form.querySelector('#email').value;
+        const senha = form.querySelector('#senha').value;
+
+        // Objeto com os dados a serem enviados para o servidor
+        const data = {
+            nome: nome,
+            email: email,
+            senha: senha
+        };
+
+        // Configuração da requisição fetch para enviar os dados para o servidor
+        fetch('/cadastrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Aqui você pode tratar a resposta do servidor, como redirecionar o usuário ou exibir uma mensagem
+            if (data.success) {
+                $('#confirmacaoModal').modal('show'); // Exibe o modal de confirmação
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    });
+});
+  </script>  
+</body>
+</html>
