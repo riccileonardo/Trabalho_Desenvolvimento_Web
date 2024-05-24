@@ -68,6 +68,16 @@ A API utiliza as seguintes dependências:
 - **Bootstrap**: Framework CSS para estilização.
 - **jQuery**: Biblioteca JavaScript para manipulação de eventos e requisições AJAX.
 
+## Imagens de Demonstração de telas do sistema
+<p float="left">
+    <img src="static/img/telas/home.png" width="500" />
+    <img src="static/img/telas/login.png" width="500" />
+    <img src="static/img/telas/recover.png" width="500" />
+    <img src="static/img/telas/cadastro.png" width="500" />
+    <img src="static/img/telas/app.png" width="500" />
+    <img src="static/img/telas/addsenha.png" width="500" />
+</p>
+
 ## Autores
 Esta API foi desenvolvida pelo grupo de modo geral.
 
