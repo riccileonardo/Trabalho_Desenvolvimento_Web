@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS chavemestra;
 
 USE chavemestra;
 
--- Restante do seu script SQL aqui
+-- Criando a tabela google_users
 DROP TABLE IF EXISTS `google_users`;
 CREATE TABLE `google_users` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -19,7 +19,20 @@ CREATE TABLE `google_users` (
 INSERT INTO `google_users` VALUES 
 (3,'113439931121184651789','oliveiramoraes230@gmail.com',NULL,'2024-05-21 20:45:16');
 
+-- Criando a tabela usuarios
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `senha_criptografada` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `usuarios` VALUES 
+(1,'alex','oliveiramoraes230@gmail.com','$2b$10$SM77K6SpAD6ZNXsEoTRuNuFI4Rl2hqMMbT/OilrLzM0v3.1OqaaKW');
+
+-- Criando a tabela senhas
 DROP TABLE IF EXISTS `senhas`;
 CREATE TABLE `senhas` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -33,15 +46,3 @@ CREATE TABLE `senhas` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `senhas_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `senha_criptografada` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO `usuarios` VALUES 
-(1,'alex','oliveiramoraes230@gmail.com','$2b$10$SM77K6SpAD6ZNXsEoTRuNuFI4Rl2hqMMbT/OilrLzM0v3.1OqaaKW'),
