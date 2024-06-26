@@ -1,10 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap");
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #0c0c0c;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff;
+    padding: 11px 0;
+}
+
 .password-manager-container {
     max-width: 1200px;
     margin: auto;
 }
 .password-manager-header {
-    background-color: #333;
-    color: #bb8080;
+    background: linear-gradient(130deg, #0b0823, #06021f);
+    color: #fff;
     padding: 10px 0;
 }
 .password-item {
@@ -13,10 +28,4 @@
 }
 .password-item:hover {
     background-color: #224161;
-}
-
-h1 {
-    font-size: 2.5rem;
-    margin: 0;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
