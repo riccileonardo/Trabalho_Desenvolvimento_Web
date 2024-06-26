@@ -929,7 +929,7 @@ a:focus {
 }
 
 .hero {
-  padding: 100px 0;
+  padding: 60px 0;
 }
 
 .hero h1 {
@@ -937,19 +937,34 @@ a:focus {
   font-weight: bold;
   color: #002366;
 }
+.hero h2{
+  font-size: 3rem;
+  font-weight: bold;
+  color: #002366; 
+}
 
 .hero .lead {
   font-size: 1.25rem;
   margin-bottom: 20px;
-  color: #6c757d;
+  color: #00bbf0;
 }
 
 .hero p {
   margin-bottom: 20px;
-  color: #6c757d;
+  color: #000000;
 }
 
 .hero .btn {
   padding: 10px 20px;
+  font-size: 1.25rem;
+}
+
+.mg-bottom-40{
+  margin-bottom: 40px;
+}
+
+.Icone-Azul-Marinho{
+  color: #00bbf0;
+  align-items: center;
   font-size: 1.25rem;
 }
