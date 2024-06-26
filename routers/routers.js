@@ -160,6 +160,11 @@ router.get('/cadastro', (req, res) => {
     let indexPath = path.join(__dirname, '/../static/html/signup/signup.html'); // Define o caminho do arquivo HTML de cadastro.
     res.sendFile(indexPath); // Envia o arquivo HTML.
 });
+//Rota para carregar a página sobre mais.
+router.get('/sobre', (req, res) => {
+    let indexPath = path.join(__dirname, '/../static/html/sobre/sobre.html'); // Define o caminho do arquivo HTML de cadastro.
+    res.sendFile(indexPath); // Envia o arquivo HTML.
+});
 
 // Rota para cadastrar um novo usuário
 router.post('/cadastrar', (req, res) => {
